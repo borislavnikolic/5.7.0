@@ -1,0 +1,29 @@
+﻿{
+  "culture": "en",
+    "texts": {
+        "HelloWorld": "Hello World!",
+        "ChangeLanguage": "Change language",
+        "HomePage": "HomePage",
+        "About": "About",
+        "PackagePage": "Paket Stranica",
+        "ConcractPage": "Ugovor Stranica",
+        "PackageCreateTitle": "Forma za kreiranje paketa",
+        "PackageUpdateTitle": "Forma za izmenu paketa",
+        "PackageName": "Naziv",
+        "PackageDescription": "Opis",
+        "PackagePrice": "Cena",
+        "PackageCategory": "Kategorija",
+        "PackageInsert": "Unos",
+        "PackageUpdate": "Izmena",
+        "PackageSave": "Sacuvaj",
+        "ConcractEmpty": "Trenutno nema nijednog ugovora",
+        "ConcractUsername": "Username",
+        "ConcractDuration": "Trajanje ugovora",
+        "ConcractGratis": "Gratis period",
+        "ConcractDiscount": "Popust",
+        "ConcractStatus": "Status",
+        "ConcractCreate" :  "Sacuvaj",
+        "Home_Description": "Welcome to orion...",
+        "About_Description": "This is a simple startup template to use ASP.NET Core with ABP framework."
+    }
+}

@@ -1,0 +1,90 @@
+﻿
+@model orion.Web.ViewModel.PackageViewModel;
+
+@section scripts
+{
+    <environment names="Development">
+        <script src="~/js/views/package/index.js"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/js/views/package/index.min.js"></script>
+    </environment>
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3 class="text-center">Paketi</h3>
+
+<div class="row">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td>Naziv</td>
+                <td>Opis</td>
+                <td>Cena</td>
+                <td>Kategorija</td>
+                <td colspan="2">Akcija</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var package in Model.Packages)
+            {
+                <tr id="@package.Id">
+                    <td>@package.Name</td>
+                    <td >@package.Description</td>
+                    <td>@package.Price</td>
+                    <td>@package.Category.ToString()</td>
+                    <td>
+                        <a asp-controller="Package" asp-action="Update" asp-route-id="@package.Id" class="btn btn-info">Izmena</a>
+                    </td>
+                    <td>
+                        <a onclick="deletePackage('@package.Id')" class="btn btn-danger">Brisanje</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <a asp-controller="Package" asp-action="Create" class="btn btn-primary btn-block">@L("PackageInsert")</a>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Da li ste sigurni?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Zatvori">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                <button type="button" class="btn btn-primary" onclick="confirm()">Obrisi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="errorModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nije dozvoljeno brisanje ovog paketa jer ucestvuje u nekom ugovoru</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+            </div>
+        </div>
+    </div>
+</div>
+

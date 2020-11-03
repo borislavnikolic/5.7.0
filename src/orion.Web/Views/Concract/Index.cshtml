@@ -1,0 +1,111 @@
+﻿
+@model orion.Web.ViewModel.ConcractViewModel;
+    <environment names="Development">
+        <script src="~/js/views/concract/Index.js"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script src="~/js/views/concract/Index.js"></script>
+    </environment>
+
+    @{
+        ViewData["Title"] = "Index";
+    }
+
+    <div class="row">
+        <h4>Statistika broja aktivnih ugovora</h4>
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Trenutan Broj Aktivnih Ugovora</td>
+                    <td>Trenutan Broj NeAktivnih Ugovora</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="activeCount">@Model.ConcractActiveStatistics[0]</td>
+                    <td>@Model.ConcractActiveStatistics[1]</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <h4>Skoriji ugovori</h4>
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td colspan="2">Akcija</td>
+                    <td>Broj Ugovora</td>
+                    <td>Username</td>
+                    <td>Trajanje</td>
+                    <td>Datum kreiranje</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var concract in Model.RecentConcracts)
+                {
+                    <tr id="@concract.Id">
+                        <td>
+                            <a asp-controller="Concract" asp-action="EditFirst" asp-route-id="@concract.Id" class="btn btn-danger">Izmeni</a>
+                        </td>
+                        <td>
+                            <a onclick="deletePackage('@concract.Id')" class="btn btn-danger">Obrisi</a>
+                        </td>
+                        <td>@concract.Id</td>
+                        <td>@concract.Username</td>
+                        <td>@concract.Duration.ToString().Replace('_', ' ')</td>
+                        <td>@concract.StartDate.ToString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <h4>Skoriji ugovori</h4>
+        <table class="table table-hover table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Broj Ugovora</td>
+                    <td>Suma</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var concract in Model.ActiveConcracts)
+                {
+                    <tr id="concract-@concract.Id">
+                        <td>@concract.Id</td>
+                        <td>@concract.Total</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <a asp-controller="Concract" asp-action="CreateFirst" class="btn btn-block btn-info">Unos Ugovora</a>
+        </div>
+        <div class="col-md-6">
+            <a asp-controller="Concract" asp-action="Copy" class="btn btn-block btn-info">Stampa Aktivnih Ugovora</a>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Da li ste sigurni?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                    <button type="button" class="btn btn-primary" onclick="confirm()">Obrisi</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,75 @@
+﻿
+@model orion.ConcractApplication.DTO.ConcractDTO;
+
+@{
+    ViewData["Title"] = "EditFirst";
+    List<orion.HistoryApplication.DTO.HistoryDTO> histories = (List<orion.HistoryApplication.DTO.HistoryDTO>)ViewBag.histories;
+
+}
+
+<h3 style="text-align:center;margin:20px">Izmena ugovora 1.deo</h3>
+
+
+
+
+<div class="row">
+    <form asp-controller="Concract" asp-action="EditFirst" method="post">
+        <input type="text" asp-for="Username" value="@Model.Username" hidden />
+        <input type="text" asp-for="Id" value="@Model.Id" hidden />
+
+        <div class="form-group">
+            <label asp-for="Status">@L("ConcractStatus")</label>
+            <select asp-for="Status" asp-items="Html.GetEnumSelectList<orion.Model.StatusType>()" class="form-control"></select>
+            <span asp-validation-for="Status"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Duration">@L("ConcractDuration")</label>
+            <select asp-for="Duration" asp-items="Html.GetEnumSelectList<orion.Model.DurationTime>()" class="form-control"></select>
+            <span asp-validation-for="Duration"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Gratis">@L("ConcractGratis")</label>
+            <select asp-for="Gratis" asp-items="Html.GetEnumSelectList<orion.Model.GratisTime>()" class="form-control"></select>
+            <span asp-validation-for="Gratis"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Discount">@L("ConcractDiscount")</label>
+            <input asp-for="Discount" class="form-control" min="0" max="100" />
+            <span asp-validation-for="Discount"></span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger btn-block">@L("ConcractCreate")</button>
+        </div>
+        @if (ViewBag.ErrorMessageUser != null)
+        {
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>@ViewBag.ErrorMessageUser</strong>
+            </div>
+        }
+    </form>
+</div>
+
+<h3>Istorija</h3>
+<div class="row">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td>Datum</td>
+                <td>Status</td>
+                <td>Suma</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var history in histories)
+            {
+                <tr>
+                    <td>@history.CreationTime</td>
+                    <td>@history.Status</td>
+                    <td>@history.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

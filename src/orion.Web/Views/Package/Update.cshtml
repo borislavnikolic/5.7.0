@@ -1,0 +1,37 @@
+﻿@model orion.PackageApplication.DTO.InputCreatePackage;
+
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h3 class="text-center">@L("PackageCreateTitle")</h3>
+
+<div class="row">
+    <form asp-controller="Package" asp-action="Update" method="post">
+        
+        <div class="form-group">
+            <label asp-for="Name">@L("PackageName")</label>
+            <input asp-for="Name" class="form-control" placeholder="@L("PackageName")" required />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">@L("PackageDescription")</label>
+            <textarea asp-for="Description" class="form-control" placeholder="@L("PackageDescription")" required></textarea>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price">@L("PackagePrice")</label>
+            <input asp-for="Price" class="form-control" placeholder="@L("PackagePrice")" required />
+            <span asp-validation-for="Price"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Category">@L("PackagePrice")</label>
+            <select asp-for="Category" asp-items="Html.GetEnumSelectList<orion.Model.CategoryType>()" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-danger">@L("PackageSave")</button>
+        </div>
+    </form>
+</div>
+
