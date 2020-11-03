@@ -30,7 +30,7 @@ namespace orion.Web.Startup
                    new MenuItemDefinition
                    (
                      PageNames.Package,
-                     L("PckagePage"),
+                     L("PackagePage"),
                      url:"Package/Index",
                      icon:"fa fa-home")
                  ).AddItem
