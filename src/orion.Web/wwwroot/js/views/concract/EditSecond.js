@@ -44,7 +44,7 @@ function getIds() {
 function createConcract() {
 
     let ids = getIds();
-    alert(ids);
+    //alert(ids);
 
     $.ajax
         ({
