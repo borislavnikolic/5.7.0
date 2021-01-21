@@ -1,6 +1,6 @@
 # Important
 
-The text of project is Zadatak file up in project.
+The text of project is Zadatak.docs file up in project.
 
 # ASP.NET Core & EntityFramework Core Based Startup Template
 
